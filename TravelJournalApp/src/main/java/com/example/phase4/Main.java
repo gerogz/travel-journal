@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+//Whole Lotta Red
 
 public class Main extends Application {
     @Override
