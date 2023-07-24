@@ -10,15 +10,14 @@ import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import com.example.phase4.DBUtils;
 
 
-public class LoggedInController implements Initializable {
+public class UserHomeScreenController implements Initializable {
     @FXML
     private Button button_logout;
 
     @FXML
-    private Label label_homescreen;
+    private Label label_userhomescreen;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -31,7 +30,7 @@ public class LoggedInController implements Initializable {
     }
 
     public void setUserInformation(String username) {
-        label_homescreen.setText(username);
+        label_userhomescreen.setText(username);
     }
 }
 
