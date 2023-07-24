@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-//hello
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
