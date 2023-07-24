@@ -19,7 +19,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField tf_username;
-
     @FXML
     private TextField tf_password;
 
