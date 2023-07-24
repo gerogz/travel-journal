@@ -97,7 +97,7 @@ public class DBUtils {
         }
     }
 
-    public static void logInUser(ActionEvent event, String username, String password) {
+    public static void logInUser(ActionEvent event, String username, String pwd) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -114,7 +114,7 @@ public class DBUtils {
             } else {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("pwd");
-                    if (retrievedPassword.equals(password)) {
+                    if (retrievedPassword.equals(pwd)) {
                         changeScene(event, "logged-in.fxml", "Welcome!", username);
                     } else {
                         System.out.println("Passwords did not match!");
