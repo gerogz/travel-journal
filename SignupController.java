@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class SignupController implements Initializable {
     @FXML
-    private Button button_signup;
+    private Button button_createAccount;
     @FXML
     private Button button_back;
 
@@ -24,7 +24,7 @@ public class SignupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        button_signup.setOnAction(new EventHandler<ActionEvent>() {
+        button_createAccount.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if (!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()) {
@@ -41,6 +41,7 @@ public class SignupController implements Initializable {
         button_back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                System.out.println("Button Back Clicked!");
                 DBUtils.changeScene(event, "login.fxml", "Back", null);
             }
         });
