@@ -34,4 +34,3 @@ public class LoggedInController implements Initializable {
         label_homescreen.setText(username);
     }
 }
-
