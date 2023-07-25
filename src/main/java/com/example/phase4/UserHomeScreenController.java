@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+//push
 public class UserHomeScreenController implements Initializable {
     @FXML
     private Button button_logout;
@@ -54,7 +54,7 @@ public class UserHomeScreenController implements Initializable {
         button_createtrip.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+                DBUtils.changeScene(event, "create-trip.fxml", "log in", null);
             }
         });
 
