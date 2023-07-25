@@ -27,6 +27,9 @@ public class ViewMyTripsController implements Initializable{
     @FXML
     private Button button_viewmytrips_back;
 
+    @FXML
+    private Button button_viewmytrips_showall;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("A");
 
@@ -89,6 +92,14 @@ public class ViewMyTripsController implements Initializable{
             }
         });
 
+        button_viewmytrips_showall.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.trip = null;
+                DBUtils.changeScene(event, "my-trip-report.fxml", "City!", null);
+            }
+        });
+
         table_viewmytrips.setOnMouseClicked(this::onTableRowClicked);
     }
     private void onTableRowClicked(MouseEvent event) {
@@ -98,6 +109,7 @@ public class ViewMyTripsController implements Initializable{
 
             // You can now perform actions based on the selected row data
             if (c != null) {
+                DBUtils.trip = c;
                 DBUtils.changeScene(event,"my-trip-report.fxml", "Sign up!", null);
             }
         }

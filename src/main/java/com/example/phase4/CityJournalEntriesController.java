@@ -45,14 +45,14 @@ public class CityJournalEntriesController implements Initializable {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
 
-            psSelect = connection.prepareStatement("SELECT date as Date, rating as Rating, note as Note\n" +
+            psSelect = connection.prepareStatement("SELECT date as Date, rating as Rating, note as Note, username as User\n" +
                     "FROM entry join city on entry.locationID = city.locationID\n" +
                     "WHERE city.name = ?");
             psSelect.setString(1, DBUtils.city.getName());
             ResultSet rs = psSelect.executeQuery();
             ObservableList<CityEntries> o = FXCollections.observableArrayList();
             while (rs.next()) {
-                CityEntries ce = new CityEntries(rs.getString("Date"), rs.getInt("Rating"), rs.getString("Note"));
+                CityEntries ce = new CityEntries(rs.getString("Date"), rs.getInt("Rating"), rs.getString("Note"), rs.getString("User"));
                 o.add(ce);
                 System.out.println(rs.getString("Date") + " " + rs.getInt("Rating") + " " + rs.getString("Note"));
             }

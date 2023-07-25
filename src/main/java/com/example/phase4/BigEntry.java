@@ -1,17 +1,18 @@
 package com.example.phase4;
 
-public class CityEntries {
+public class BigEntry {
     private String date;
+    private String city;
+    private String country;
     private int rating;
     private String note;
 
-    private String user;
-
-    public CityEntries(String date, int rating, String note, String user) {
+    public BigEntry(String date, String city, String country, int rating, String note) {
         this.date = date;
+        this.city = city;
+        this.country = country;
         this.rating = rating;
         this.note = note;
-        this.user = user;
     }
 
     public String getDate() {
@@ -20,6 +21,22 @@ public class CityEntries {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getRating() {
@@ -36,17 +53,5 @@ public class CityEntries {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String toString() {
-        return date + " " + rating + " " + note;
     }
 }

@@ -19,10 +19,12 @@ import java.sql.*;
 
 public class DBUtils {
     public static String user;
-    private static String sqlURL = "jdbc:mysql://localhost:3306/sakila";
-    private static String sqlPassword = "me902978";
+    private static String sqlURL = "jdbc:mysql://localhost:3306/test6";
+    private static String sqlPassword = "SaintLouis16#";
     public static City city;
     public static CityEntries cityEntry;
+
+    public static Trip trip;
 
     public static void changeScene(Event event, String fxmlFile, String title, String username) {
         Parent root = null;
@@ -209,6 +211,40 @@ public class DBUtils {
             psSelect = connection.prepareStatement("SELECT name FROM trip WHERE username = ?");
             psSelect.setString(1, user);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void deleteEntry(ActionEvent event, String cityName, String countryName, String entryDate) {
+        Connection connection = null;
+        PreparedStatement psDelete = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+            psDelete = connection.prepareStatement(
+                    "SET @city_location_ID = ( SELECT locationID FROM city WHERE name = ? AND country = ?);"
+                            + "DELETE FROM entry WHERE entry.date = ? AND location_ID = @city_location_ID AND username = ?;");
+            psDelete.setString(1, cityName);
+            psDelete.setString(2, countryName);
+            psDelete.setString(3, entryDate);
+            psDelete.setString(4, user);
+            psDelete.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
