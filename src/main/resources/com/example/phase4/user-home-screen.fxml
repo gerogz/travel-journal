@@ -48,14 +48,14 @@
                </font>
             </Label>
             <Button fx:id="button_logout" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Logout" />
-            <Button layoutX="564.0" layoutY="14.0" mnemonicParsing="false" text="Settings" />
+            <Button fx:id="button_settings" layoutX="564.0" layoutY="14.0" mnemonicParsing="false" text="Settings" />
             <Button fx:id="button_createtrip" layoutX="23.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Create trip" />
             <Button fx:id="button_viewtrips" layoutX="176.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="View trips/journal entries" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font size="11.0" />
                </font></Button>
             <Button fx:id="button_searchcities" layoutX="327.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Search cities" />
-            <Button fx:id="button_createjournal" layoutX="479.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Create journal entry" />
+            <Button fx:id="button_createjournalentry" layoutX="479.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Create journal entry" />
       </children>
     </AnchorPane>
   </children>

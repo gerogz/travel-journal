@@ -17,16 +17,68 @@ public class UserHomeScreenController implements Initializable {
     private Button button_logout;
 
     @FXML
+    private Button button_settings;
+
+    @FXML
     private Label label_userhomescreen;
+
+    @FXML
+    private Button button_createtrip;
+
+    @FXML
+    private Button button_viewtrips;
+
+    @FXML
+    private Button button_searchcities;
+
+    @FXML
+    private Button button_createjournalentry;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         button_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "sample.fxml", "log in", "gi");
+                DBUtils.changeScene(event, "login.fxml", "log in", null);
             }
         });
+
+        button_settings.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+            }
+        });
+
+        button_createtrip.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+            }
+        });
+
+        button_viewtrips.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+            }
+        });
+
+        button_searchcities.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+            }
+        });
+
+        button_createjournalentry.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+            }
+        });
+
     }
 
     public void setUserInformation(String username) {
