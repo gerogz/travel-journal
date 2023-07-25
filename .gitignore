@@ -54,3 +54,8 @@ target/classes/com/example/phase4/view-city-entry.fxml
 target/classes/com/example/phase4/ViewCityEntry$1.class
 target/classes/com/example/phase4/ViewCityEntry.class
 target/classes/com/example/phase4/view-trips.fxml
+target/classes/com/example/phase4/CreateCityEntry$1.class
+target/classes/com/example/phase4/CreateCityEntry$2.class
+target/classes/com/example/phase4/CreateCityEntry$3.class
+target/classes/com/example/phase4/CreateCityEntry$4.class
+target/classes/com/example/phase4/ViewTrips.class

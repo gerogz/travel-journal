@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.event.Event;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -17,13 +18,13 @@ import java.sql.*;
 //hello
 
 public class DBUtils {
-    private static String user;
+    public static String user;
     private static String sqlURL = "jdbc:mysql://localhost:3306/sakila";
     private static String sqlPassword = "me902978";
     public static City city;
     public static CityEntries cityEntry;
 
-    public static void changeScene(ActionEvent event, String fxmlFile, String title, String username) {
+    public static void changeScene(Event event, String fxmlFile, String title, String username) {
         Parent root = null;
 
         if (username != null) {
