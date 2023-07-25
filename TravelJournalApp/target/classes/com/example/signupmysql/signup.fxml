@@ -37,25 +37,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phase4.UserHomeScreenController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.signupmysql.SignupController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label fx:id="label_userhomescreen" layoutX="225.0" layoutY="61.0" text="User Home Screen">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Button fx:id="button_logout" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Logout" />
-            <Button layoutX="564.0" layoutY="14.0" mnemonicParsing="false" text="Settings" />
-            <Button fx:id="button_createtrip" layoutX="23.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Create trip" />
-            <Button fx:id="button_viewtrips" layoutX="176.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="View trips/journal entries" textOverrun="WORD_ELLIPSIS">
-               <font>
-                  <Font size="11.0" />
-               </font></Button>
-            <Button fx:id="button_searchcities" layoutX="327.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Search cities" />
-            <Button fx:id="button_createjournal" layoutX="479.0" layoutY="151.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="134.0" text="Create journal entry" />
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <Text layoutX="71.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account" />
+            <Button fx:id="button_back" layoutX="433.0" layoutY="28.0" mnemonicParsing="false" text="Back" />
+            <Button fx:id="button_createAccount" layoutX="239.0" layoutY="223.0" mnemonicParsing="false" text="Button" />
       </children>
     </AnchorPane>
   </children>
