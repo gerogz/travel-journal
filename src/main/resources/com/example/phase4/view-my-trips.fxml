@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="button_viewmytrips_back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+      <Text fx:id="text_viewmytrips" layoutX="226.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View My Trips">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TableView fx:id="table_viewmytrips" layoutX="200.0" layoutY="110.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="column_viewmytrips" prefWidth="199.0" text="Trips" />
+        </columns>
+      </TableView>
+      <Button fx:id="button_viewmytrips_showall" layoutX="217.0" layoutY="328.0" mnemonicParsing="false" text="Show all of my entries" />
+   </children>
+</AnchorPane>

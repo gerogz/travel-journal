@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="button_mytripreport_back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+      <Text fx:id="text_mytripreport" layoutX="217.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Trip Report">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <TableView fx:id="table_mytripreport" layoutX="113.0" layoutY="128.0" prefHeight="200.0" prefWidth="375.0">
+        <columns>
+          <TableColumn fx:id="column_mytripreport_date" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="column_mytripreport_city" prefWidth="75.0" text="City" />
+            <TableColumn fx:id="column_mytripreport_country" prefWidth="75.0" text="Country" />
+            <TableColumn fx:id="column_mytripreport_rating" prefWidth="75.0" text="Rating" />
+            <TableColumn fx:id="note" prefWidth="75.0" text="Note" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
