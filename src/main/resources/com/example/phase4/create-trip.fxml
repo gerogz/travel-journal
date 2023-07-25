@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phase4.CreateTripController">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="button_back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
       <TextField fx:id="tf_tripname" layoutX="226.0" layoutY="136.0" promptText="Trip Name" />
       <TextField fx:id="tf_startdate" layoutX="226.0" layoutY="174.0" promptText="Start Date" />
       <TextField fx:id="tf_enddate" layoutX="225.0" layoutY="212.0" prefHeight="26.0" prefWidth="150.0" promptText="End Date" />

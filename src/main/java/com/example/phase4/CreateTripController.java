@@ -13,7 +13,8 @@ import java.util.ResourceBundle;
 public class CreateTripController implements Initializable{
     @FXML
     private Button button_createtrip;
-
+    @FXML
+    private Button button_back;
     @FXML
     private TextField tf_tripname;
 
@@ -34,14 +35,12 @@ public class CreateTripController implements Initializable{
                 DBUtils.createTrip(event, tf_tripname.getText(), tf_startdate.getText(), tf_enddate.getText());
             }
         });
-        /*
-        button_signup.setOnAction(new EventHandler<ActionEvent>() {
+
+        button_back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "signup.fxml", "Sign up!", null);
+                DBUtils.changeScene(event, "user-home-screen.fxml", "City!", null);
             }
         });
-         */
-
     }
 }

@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 
 import java.io.IOException;
 import java.sql.*;
@@ -14,23 +17,46 @@ import java.sql.*;
 //hello
 
 public class DBUtils {
-    private static String user;
+    public static String user;
+    public static City city;
+    public static CityEntries cityEntry;
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username) {
         Parent root = null;
 
         if (username != null) {
             try {
-                if (fxmlFile == "user-home-screen.fxml") {
-                    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-                    root = loader.load();
-                    UserHomeScreenController userHomeScreenController = loader.getController();
-                    userHomeScreenController.setUserInformation(username);
-                } else if (fxmlFile == "admin-flags.fxml") {
-//                    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-//                    root = loader.load();
-//                    UserHomeScreenController userHomeScreenController = loader.getController();
-//                    userHomeScreenController.setUserInformation(username);
-                }
+                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                root = loader.load();
+                UserHomeScreenController userHomeScreenController = loader.getController();
+                userHomeScreenController.setUserInformation(username);
+                System.out.println(userHomeScreenController);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                root = FXMLLoader.load(DBUtils.class.getResource(fxmlFile));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
+    }
+
+    public static void changeScene(MouseEvent event, String fxmlFile, String title, String username) {
+        Parent root = null;
+
+        if (username != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                System.out.println(loader);
+                root = loader.load();
+                UserHomeScreenController userHomeScreenController = loader.getController();
+                userHomeScreenController.setUserInformation(username);
+                System.out.println(userHomeScreenController);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,7 +80,7 @@ public class DBUtils {
         //PreparedStatement psCheckUserExists = null;
         //ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
             psInsert = connection.prepareStatement("INSERT INTO account (fname, lname, email, username, pwd) VALUES (?, ?, ?, ?, ?)");
             //ZoneId zoneId = ZoneId.of();
             String today = "" + java.time.LocalDate.now();
@@ -90,7 +116,7 @@ public class DBUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema","root", "L2O2Z/Hb7k9rf3");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6","root", "SaintLouis16#");
             preparedStatement = connection.prepareStatement("SELECT pwd FROM account WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -145,7 +171,7 @@ public class DBUtils {
             PreparedStatement psInsert = null;
             ResultSet resultSet = null;
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
 
                 psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
                 psSelect.setString(1, user);
