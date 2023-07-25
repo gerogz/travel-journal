@@ -230,4 +230,38 @@ public class DBUtils {
             }
         }
     }
+
+    public static void deleteEntry(ActionEvent event, String cityName, String countryName, String entryDate) {
+        Connection connection = null;
+        PreparedStatement psDelete = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+            psDelete = connection.prepareStatement(
+                    "SET @city_location_ID = ( SELECT locationID FROM city WHERE name = ? AND country = ?);"
+                            + "DELETE FROM entry WHERE entry.date = ? AND location_ID = @city_location_ID AND username = ?;");
+            psDelete.setString(1, cityName);
+            psDelete.setString(2, countryName);
+            psDelete.setString(3, entryDate);
+            psDelete.setString(4, user);
+            psDelete.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

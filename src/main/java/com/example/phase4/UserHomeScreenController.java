@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +32,6 @@ public class UserHomeScreenController implements Initializable {
 
     @FXML
     private Button button_createjournalentry;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,4 +83,3 @@ public class UserHomeScreenController implements Initializable {
         label_userhomescreen.setText(username);
     }
 }
-
