@@ -40,7 +40,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phase4.SignupController">
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phase4.CreateAccountController">
    <children>
       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="357.0" prefWidth="615.0">
       <children>
