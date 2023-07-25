@@ -14,6 +14,7 @@ import java.sql.*;
 //hello
 
 public class DBUtils {
+    private static String user;
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username) {
         Parent root = null;
 
@@ -21,8 +22,8 @@ public class DBUtils {
             try {
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root = loader.load();
-                LoggedInController loggedInController = loader.getController();
-                loggedInController.setUserInformation(username);
+                UserHomeScreenController userHomeScreenController = loader.getController();
+                userHomeScreenController.setUserInformation(username);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -45,7 +46,7 @@ public class DBUtils {
         PreparedStatement psCheckUserExists = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
             psCheckUserExists = connection.prepareStatement("SELECT * FROM user WHERE username = ?");
             psCheckUserExists.setString(1, username);
             resultSet = psCheckUserExists.executeQuery();
@@ -102,7 +103,7 @@ public class DBUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
             preparedStatement = connection.prepareStatement("SELECT pwd FROM account WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -115,7 +116,8 @@ public class DBUtils {
                 while (resultSet.next()) {
                     String retrievedPassword = resultSet.getString("pwd");
                     if (retrievedPassword.equals(pwd)) {
-                        changeScene(event, "logged-in.fxml", "Welcome!", username);
+                        changeScene(event, "user-home-screen.fxml", "Welcome!", username);
+                        user = username;
                     } else {
                         System.out.println("Passwords did not match!");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -142,12 +144,54 @@ public class DBUtils {
                 }
             }
             if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-}
-}
+        public static void createTrip(ActionEvent event, String tname, String start, String end) {
+            Connection connection = null;
+            PreparedStatement psSelect = null;
+            PreparedStatement psInsert = null;
+            ResultSet resultSet = null;
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+
+                psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
+                psSelect.setString(1, user);
+                ResultSet rs = psSelect.executeQuery();
+                rs.next();
+                String s = rs.getString(1);
+
+                psInsert = connection.prepareStatement("INSERT INTO trip (start_date, end_date, name, email, username) VALUES (?, ?, ?, ?, ?)");
+                psInsert.setString(1, start);
+                psInsert.setString(2, end);
+                psInsert.setString(3, tname);
+                psInsert.setString(4, s);
+                psInsert.setString(5, user);
+                System.out.println(s + " "+ user);
+                psInsert.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (resultSet != null) {
+                    try {
+                        resultSet.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
