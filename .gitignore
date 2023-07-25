@@ -39,3 +39,17 @@ target/classes/module-info.class
 .vscode/settings.json
 pom.xml
 pom.xml
+target/classes/com/example/phase4/city-journal-entries.fxml
+target/classes/com/example/phase4/City.class
+target/classes/com/example/phase4/CityEntries.class
+target/classes/com/example/phase4/CityJournalEntriesController$1.class
+target/classes/com/example/phase4/create-city-journal-entry.fxml
+target/classes/com/example/phase4/CreateCityEntry.class
+target/classes/com/example/phase4/CreateTripController$2.class
+target/classes/com/example/phase4/SearchResultController$1.class
+target/classes/com/example/phase4/SearchResultController$2.class
+target/classes/com/example/phase4/SearchResultController$3.class
+target/classes/com/example/phase4/SearchResultController.class
+target/classes/com/example/phase4/view-city-entry.fxml
+target/classes/com/example/phase4/ViewCityEntry$1.class
+target/classes/com/example/phase4/ViewCityEntry.class
