@@ -20,10 +20,17 @@ public class DBUtils {
 
         if (username != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-                root = loader.load();
-                UserHomeScreenController userHomeScreenController = loader.getController();
-                userHomeScreenController.setUserInformation(username);
+                if (fxmlFile == "user-home-screen.fxml") {
+                    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                    root = loader.load();
+                    UserHomeScreenController userHomeScreenController = loader.getController();
+                    userHomeScreenController.setUserInformation(username);
+                } else if (fxmlFile == "admin-flags.fxml") {
+//                    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+//                    root = loader.load();
+//                    UserHomeScreenController userHomeScreenController = loader.getController();
+//                    userHomeScreenController.setUserInformation(username);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -66,8 +73,15 @@ public class DBUtils {
             psInsertAdminUser.setString(3, today);
             psInsert.executeUpdate();
             psInsertAdminUser.executeUpdate();
+            if (adminOrUser == 2) {
+                changeScene(event, "user-home-screen.fxml", "Welcome!", username);
+            } else if (adminOrUser == 1) {
+                changeScene(event, "admin-flags.fxml", "Welcome!", null);
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.show();;
         }
     }
 

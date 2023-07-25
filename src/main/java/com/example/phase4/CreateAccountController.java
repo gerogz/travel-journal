@@ -53,11 +53,6 @@ public class CreateAccountController implements Initializable {
                         && !tf_email.getText().trim().isEmpty() && !tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()
                         && adminOrUser != 0) {
                     DBUtils.createAccount(event, tf_fname.getText(), tf_lname.getText(), tf_email.getText(), tf_username.getText(), tf_password.getText(), adminOrUser);
-                    if (adminOrUser == 2) {
-                        DBUtils.changeScene(event, "user-home-screen.fxml", "Welcome!", tf_username.getText());
-                    } else if (adminOrUser == 1) {
-                        DBUtils.changeScene(event, "admin-flags.fxml", "Welcome!", null);
-                    }
                 } else {
                     System.out.println("Please fill in all information");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
