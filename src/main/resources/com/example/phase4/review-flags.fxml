@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="button_reviewflags_back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+      <Text fx:id="text_reviewflags" layoutX="116.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Review Flagged Entry (Admin)">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="textfield_reviewflags_city" layoutX="116.0" layoutY="119.0" prefHeight="31.0" prefWidth="109.0" promptText="City" />
+      <TextArea fx:id="textfield_reviewflags_date" layoutX="246.0" layoutY="119.0" prefHeight="31.0" prefWidth="109.0" promptText="Date" />
+      <TextArea fx:id="textfield_reviewflags_rating" layoutX="375.0" layoutY="119.0" prefHeight="31.0" prefWidth="109.0" promptText="Rating" />
+      <TextArea fx:id="textfield_reviewflags_note" layoutX="115.0" layoutY="169.0" prefHeight="114.0" prefWidth="369.0" promptText="Note" />
+      <Button fx:id="button_reviewflags_banuser" layoutX="390.0" layoutY="302.0" mnemonicParsing="false" text="Ban User" />
+      <Button fx:id="button_reviewflags_deleteentry" layoutX="250.0" layoutY="302.0" mnemonicParsing="false" text="Delete Entry" />
+      <Button fx:id="button_reviewflags_clearflag" layoutX="127.0" layoutY="302.0" mnemonicParsing="false" text="Clear Flag" />
+   </children>
+</AnchorPane>
