@@ -52,7 +52,7 @@ public class CreateAccountController implements Initializable {
                 if (!tf_fname.getText().trim().isEmpty() && !tf_lname.getText().trim().isEmpty()
                         && !tf_email.getText().trim().isEmpty() && !tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()
                         && adminOrUser != 0) {
-                    DBUtils.createaccount(event, tf_fname.getText(), tf_lname.getText(), tf_email.getText(), tf_username.getText(), tf_password.getText(), adminOrUser);
+                    DBUtils.createAccount(event, tf_fname.getText(), tf_lname.getText(), tf_email.getText(), tf_username.getText(), tf_password.getText(), adminOrUser);
                     if (adminOrUser == 2) {
                         DBUtils.changeScene(event, "user-home-screen.fxml", "Welcome!", tf_username.getText());
                     } else if (adminOrUser == 1) {
