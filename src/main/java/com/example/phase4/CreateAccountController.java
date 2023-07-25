@@ -15,24 +15,53 @@ public class CreateAccountController implements Initializable {
     private Button button_createAccount;
     @FXML
     private Button button_back;
-
+    @FXML
+    private TextField tf_fname;
+    @FXML
+    private TextField tf_lname;
+    @FXML
+    private TextField tf_email;
     @FXML
     private TextField tf_username;
     @FXML
     private TextField tf_password;
+    @FXML
+    private Button button_admin;
+    @FXML
+    private Button button_user;
 
+    private int adminOrUser = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        button_admin.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                adminOrUser = 1;
+            }
+        });
+        button_user.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                adminOrUser = 2;
+            }
+        });
         button_createAccount.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()) {
-                    DBUtils.signUpUser(event, tf_username.getText(), tf_password.getText());
+                if (!tf_fname.getText().trim().isEmpty() && !tf_lname.getText().trim().isEmpty()
+                        && !tf_email.getText().trim().isEmpty() && !tf_username.getText().trim().isEmpty() && !tf_password.getText().trim().isEmpty()
+                        && adminOrUser != 0) {
+                    DBUtils.createaccount(event, tf_fname.getText(), tf_lname.getText(), tf_email.getText(), tf_username.getText(), tf_password.getText(), adminOrUser);
+                    if (adminOrUser == 2) {
+                        DBUtils.changeScene(event, "user-home-screen.fxml", "Welcome!", tf_username.getText());
+                    } else if (adminOrUser == 1) {
+                        DBUtils.changeScene(event, "admin-flags.fxml", "Welcome!", null);
+                    }
                 } else {
                     System.out.println("Please fill in all information");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Please fill in all information to sign up!");
+                    alert.setContentText("Please fill in all information to create an account!");
                     alert.show();
                 }
             }
