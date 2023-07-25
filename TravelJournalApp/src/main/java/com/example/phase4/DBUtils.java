@@ -38,24 +38,24 @@ public class DBUtils {
         stage.show();
     }
 
-    public static void signUpUser(ActionEvent event, String username, String password) {
+    public static void createaccount(ActionEvent event, String fname, String lname, String email, String username, String password, int adminOrUser) {
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psCheckUserExists = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
-            psCheckUserExists = connection.prepareStatement("SELECT * FROM user WHERE username = ?");
+            psCheckUserExists = connection.prepareStatement("SELECT * FROM account WHERE username = ?");
             psCheckUserExists.setString(1, username);
             resultSet = psCheckUserExists.executeQuery();
 
             if (resultSet.isBeforeFirst()) {
-                System.out.println("User already exists!");
+                System.out.println("Username already exists!");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("You cannot use this username.");
                 alert.show();
             } else {
-                psInsert = connection.prepareStatement("INSERT INTO user (username, pwd) VALUES (?, ?");
+                psInsert = connection.prepareStatement("INSERT INTO account (username, pwd) VALUES (?, ?");
                 psInsert.setString(1, username);
                 psInsert.setString(2, password);
                 psInsert.executeUpdate();
