@@ -59,7 +59,6 @@ public class CityJournalEntriesController implements Initializable {
 
             addEntry(o);
 
-            test("Hello");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -84,6 +83,13 @@ public class CityJournalEntriesController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event, "search-result.fxml", "City!", null);
+            }
+        });
+
+        button_createjournalentry.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "create-city-journal-entry.fxml", "City!", null);
             }
         });
     }
