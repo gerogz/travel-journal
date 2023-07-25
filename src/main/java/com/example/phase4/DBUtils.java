@@ -40,61 +40,34 @@ public class DBUtils {
         stage.show();
     }
 
-    public static void signUpUser(ActionEvent event, String username, String password) {
+    public static void createAccount(ActionEvent event, String fname, String lname, String email, String username, String password, int adminOrUser) {
         Connection connection = null;
         PreparedStatement psInsert = null;
-        PreparedStatement psCheckUserExists = null;
-        ResultSet resultSet = null;
+        PreparedStatement psInsertAdminUser = null;
+        //PreparedStatement psCheckUserExists = null;
+        //ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
-            psCheckUserExists = connection.prepareStatement("SELECT * FROM user WHERE username = ?");
-            psCheckUserExists.setString(1, username);
-            resultSet = psCheckUserExists.executeQuery();
-
-            if (resultSet.isBeforeFirst()) {
-                System.out.println("User already exists!");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You cannot use this username.");
-                alert.show();
-            } else {
-                psInsert = connection.prepareStatement("INSERT INTO user (username, pwd) VALUES (?, ?");
-                psInsert.setString(1, username);
-                psInsert.setString(2, password);
-                psInsert.executeUpdate();
-
-                changeScene(event, "logged-in.fxml", "Welcome!", username);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+            psInsert = connection.prepareStatement("INSERT INTO account (fname, lname, email, username, pwd) VALUES (?, ?, ?, ?, ?)");
+            //ZoneId zoneId = ZoneId.of();
+            String today = "" + java.time.LocalDate.now();
+            if (adminOrUser == 1) {
+                psInsertAdminUser = connection.prepareStatement("INSERT INTO admin (email, username, startDate) VALUES(?, ?, ?)");
+            } else if (adminOrUser == 2) {
+                psInsertAdminUser = connection.prepareStatement("INSERT INTO user (email, username, memberDate, privacyLevel) VALUES(?, ?, ?, \"private\")");
             }
+            psInsert.setString(1, fname);
+            psInsert.setString(2, lname);
+            psInsert.setString(3, email);
+            psInsert.setString(4, username);
+            psInsert.setString(5, password);
+            psInsertAdminUser.setString(1, email);
+            psInsertAdminUser.setString(2, username);
+            psInsertAdminUser.setString(3, today);
+            psInsert.executeUpdate();
+            psInsertAdminUser.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psCheckUserExists != null) {
-                try {
-                    psCheckUserExists.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (psInsert != null) {
-                try {
-                    psInsert.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch(SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -103,7 +76,7 @@ public class DBUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema","root", "L2O2Z/Hb7k9rf3");
             preparedStatement = connection.prepareStatement("SELECT pwd FROM account WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -158,7 +131,7 @@ public class DBUtils {
             PreparedStatement psInsert = null;
             ResultSet resultSet = null;
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
 
                 psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
                 psSelect.setString(1, user);
