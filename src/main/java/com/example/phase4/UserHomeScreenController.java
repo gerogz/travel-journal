@@ -61,7 +61,7 @@ public class UserHomeScreenController implements Initializable {
         button_viewtrips.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "view-my-trips.fxml", "log in", null);
+                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
             }
         });
 

@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.event.Event;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
@@ -18,18 +19,27 @@ import java.sql.*;
 
 public class DBUtils {
     public static String user;
+    private static String sqlURL = "jdbc:mysql://localhost:3306/sakila";
+    private static String sqlPassword = "me902978";
     public static City city;
     public static CityEntries cityEntry;
-    public static void changeScene(ActionEvent event, String fxmlFile, String title, String username) {
+
+    public static void changeScene(Event event, String fxmlFile, String title, String username) {
         Parent root = null;
 
         if (username != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-                root = loader.load();
-                UserHomeScreenController userHomeScreenController = loader.getController();
-                userHomeScreenController.setUserInformation(username);
-                System.out.println(userHomeScreenController);
+                if (fxmlFile == "user-home-screen.fxml") {
+                    FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                    root = loader.load();
+                    UserHomeScreenController userHomeScreenController = loader.getController();
+                    userHomeScreenController.setUserInformation(username);
+                } else if (fxmlFile == "admin-flags.fxml") {
+                    // FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
+                    // root = loader.load();
+                    // UserHomeScreenController userHomeScreenController = loader.getController();
+                    // userHomeScreenController.setUserInformation(username);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -46,48 +56,26 @@ public class DBUtils {
         stage.show();
     }
 
-    public static void changeScene(MouseEvent event, String fxmlFile, String title, String username) {
-        Parent root = null;
-
-        if (username != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
-                System.out.println(loader);
-                root = loader.load();
-                UserHomeScreenController userHomeScreenController = loader.getController();
-                userHomeScreenController.setUserInformation(username);
-                System.out.println(userHomeScreenController);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                root = FXMLLoader.load(DBUtils.class.getResource(fxmlFile));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-    }
-
-    public static void createAccount(ActionEvent event, String fname, String lname, String email, String username, String password, int adminOrUser) {
+    public static void createAccount(ActionEvent event, String fname, String lname, String email, String username,
+            String password, int adminOrUser) {
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psInsertAdminUser = null;
-        //PreparedStatement psCheckUserExists = null;
-        //ResultSet resultSet = null;
+        // PreparedStatement psCheckUserExists = null;
+        // ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
-            psInsert = connection.prepareStatement("INSERT INTO account (fname, lname, email, username, pwd) VALUES (?, ?, ?, ?, ?)");
-            //ZoneId zoneId = ZoneId.of();
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+
+            psInsert = connection.prepareStatement(
+                    "INSERT INTO account (fname, lname, email, username, pwd) VALUES (?, ?, ?, ?, ?)");
+            // ZoneId zoneId = ZoneId.of();
             String today = "" + java.time.LocalDate.now();
             if (adminOrUser == 1) {
-                psInsertAdminUser = connection.prepareStatement("INSERT INTO admin (email, username, startDate) VALUES(?, ?, ?)");
+                psInsertAdminUser = connection
+                        .prepareStatement("INSERT INTO admin (email, username, startDate) VALUES(?, ?, ?)");
             } else if (adminOrUser == 2) {
-                psInsertAdminUser = connection.prepareStatement("INSERT INTO user (email, username, memberDate, privacyLevel) VALUES(?, ?, ?, \"private\")");
+                psInsertAdminUser = connection.prepareStatement(
+                        "INSERT INTO user (email, username, memberDate, privacyLevel) VALUES(?, ?, ?, \"private\")");
             }
             psInsert.setString(1, fname);
             psInsert.setString(2, lname);
@@ -107,7 +95,8 @@ public class DBUtils {
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(e.getMessage());
-            alert.show();;
+            alert.show();
+            ;
         }
     }
 
@@ -116,7 +105,8 @@ public class DBUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6","root", "SaintLouis16#");
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+
             preparedStatement = connection.prepareStatement("SELECT pwd FROM account WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -165,46 +155,77 @@ public class DBUtils {
             }
         }
     }
-        public static void createTrip(ActionEvent event, String tname, String start, String end) {
-            Connection connection = null;
-            PreparedStatement psSelect = null;
-            PreparedStatement psInsert = null;
-            ResultSet resultSet = null;
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
 
-                psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
-                psSelect.setString(1, user);
-                ResultSet rs = psSelect.executeQuery();
-                rs.next();
-                String s = rs.getString(1);
+    public static void createTrip(ActionEvent event, String tname, String start, String end) {
+        Connection connection = null;
+        PreparedStatement psSelect = null;
+        PreparedStatement psInsert = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
 
-                psInsert = connection.prepareStatement("INSERT INTO trip (start_date, end_date, name, email, username) VALUES (?, ?, ?, ?, ?)");
-                psInsert.setString(1, start);
-                psInsert.setString(2, end);
-                psInsert.setString(3, tname);
-                psInsert.setString(4, s);
-                psInsert.setString(5, user);
-                System.out.println(s + " "+ user);
-                psInsert.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                if (resultSet != null) {
-                    try {
-                        resultSet.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+            psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
+            psSelect.setString(1, user);
+            ResultSet rs = psSelect.executeQuery();
+            rs.next();
+            String s = rs.getString(1);
+
+            psInsert = connection.prepareStatement(
+                    "INSERT INTO trip (start_date, end_date, name, email, username) VALUES (?, ?, ?, ?, ?)");
+            psInsert.setString(1, start);
+            psInsert.setString(2, end);
+            psInsert.setString(3, tname);
+            psInsert.setString(4, s);
+            psInsert.setString(5, user);
+            System.out.println(s + " " + user);
+            psInsert.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                if (connection != null) {
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
 
+    public static void viewTrips(ActionEvent event) {
+        Connection connection = null;
+        PreparedStatement psSelect = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+
+            psSelect = connection.prepareStatement("SELECT name FROM trip WHERE username = ?");
+            psSelect.setString(1, user);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
