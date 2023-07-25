@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignupController implements Initializable {
+public class CreateAccountController implements Initializable {
     @FXML
     private Button button_createAccount;
     @FXML

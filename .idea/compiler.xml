@@ -9,5 +9,9 @@
         <module name="sign-up-mysql" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sign-up-mysql (1)" target="11" />
+      <module name="sign-up-mysql (2)" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
