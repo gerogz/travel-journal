@@ -68,14 +68,14 @@ public class UserHomeScreenController implements Initializable {
         button_searchcities.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+                DBUtils.changeScene(event, "search-result.fxml", "log in", null);
             }
         });
 
         button_createjournalentry.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "user-settings.fxml", "log in", null);
+                DBUtils.changeScene(event, "create-city-journal-entry.fxml", "log in", null);
             }
         });
 
