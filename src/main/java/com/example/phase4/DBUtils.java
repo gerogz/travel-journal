@@ -92,6 +92,7 @@ public class DBUtils {
             psInsertAdminUser.executeUpdate();
             if (adminOrUser == 2) {
                 changeScene(event, "user-home-screen.fxml", "Welcome!", username);
+                user = username;
             } else if (adminOrUser == 1) {
                 changeScene(event, "admin-flags.fxml", "Welcome!", null);
             }
