@@ -1,4 +1,5 @@
 package com.example.phase4;
+
 import com.example.phase4.DBUtils;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import com.example.phase4.DBUtils;
+
 public class CreateCityEntry implements Initializable {
     String privacy = null;
 
@@ -36,17 +38,18 @@ public class CreateCityEntry implements Initializable {
 
     @FXML
     private Button button_save;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        combo_rating.setItems(FXCollections.observableArrayList(1,2,3,4,5));
+        combo_rating.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
 
         Connection connection = null;
         PreparedStatement psInsert = null;
         PreparedStatement psSelect = null;
         PreparedStatement psInsertAdminUser = null;
-        //PreparedStatement psCheckUserExists = null;
-        //ResultSet resultSet = null;
+        // PreparedStatement psCheckUserExists = null;
+        // ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "me902978");
             psSelect = connection.prepareStatement("SELECT privacyLevel FROM user WHERE username = ?");
 
             psSelect.setString(1, DBUtils.user);
@@ -90,7 +93,8 @@ public class CreateCityEntry implements Initializable {
                 PreparedStatement psInsert = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root",
+                            "me902978");
                     psSelect = connection.prepareStatement("SELECT locationID FROM city WHERE name = ?");
                     psSelect.setString(1, tf_city.getText());
                     ResultSet rs = psSelect.executeQuery();
@@ -102,8 +106,9 @@ public class CreateCityEntry implements Initializable {
                     rs = psSelect.executeQuery();
                     rs.next();
                     String s = rs.getString(1);
-                    psInsert = connection.prepareStatement("INSERT INTO entry (note, rating, date, privacyLevel, locationID, email, username)\n" +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?);");
+                    psInsert = connection.prepareStatement(
+                            "INSERT INTO entry (note, rating, date, privacyLevel, locationID, email, username)\n" +
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?);");
                     psInsert.setString(1, tf_note.getText());
                     psInsert.setInt(2, combo_rating.getValue());
                     psInsert.setString(3, tf_date.getText());

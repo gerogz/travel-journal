@@ -1,4 +1,5 @@
 package com.example.phase4;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
 public class AdminFlagsController implements Initializable {
     @FXML
     private TableView<adminPageEntry> table_adminflags;
@@ -30,6 +32,7 @@ public class AdminFlagsController implements Initializable {
     private TableColumn<adminPageEntry, String> column_adminflags_flagger;
     @FXML
     private Button button_adminflags_logoff;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         column_adminflags_user.setCellValueFactory(new PropertyValueFactory<adminPageEntry, String>("user"));
         column_adminflags_city.setCellValueFactory(new PropertyValueFactory<adminPageEntry, String>("city"));
@@ -41,26 +44,31 @@ public class AdminFlagsController implements Initializable {
         PreparedStatement psSelect = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "me902978");
 
-            psSelect = connection.prepareStatement("SELECT entry_username AS user, entry_email AS email, city.name AS city, entry.note AS note, reason.reason AS reason, username AS flagger, email AS flaggerEmail, locationID, entry.date as Date, rating\n" +
-                    "FROM reason\n" +
-                    "NATURAL JOIN entry\n" +
-                    "NATURAL JOIN flags\n" +
-                    "NATURAL JOIN city\n" +
-                    "ORDER BY entry_username, location_ID;");
+            psSelect = connection.prepareStatement(
+                    "SELECT entry_username AS user, entry_email AS email, city.name AS city, entry.note AS note, reason.reason AS reason, username AS flagger, email AS flaggerEmail, locationID, entry.date as Date, rating\n"
+                            +
+                            "FROM reason\n" +
+                            "NATURAL JOIN entry\n" +
+                            "NATURAL JOIN flags\n" +
+                            "NATURAL JOIN city\n" +
+                            "ORDER BY entry_username, location_ID;");
             ResultSet rs = psSelect.executeQuery();
             ObservableList<adminPageEntry> o = FXCollections.observableArrayList();
             while (rs.next()) {
-                adminPageEntry ce = new adminPageEntry(rs.getString("user"), rs.getString("city"), rs.getString("note"), rs.getString("reason"), rs.getString("flagger"),
-                        rs.getDate("Date").toString(), rs.getInt("rating"), rs.getString("email"), rs.getString("flaggerEmail"), rs.getInt("locationID"));
+                adminPageEntry ce = new adminPageEntry(rs.getString("user"), rs.getString("city"), rs.getString("note"),
+                        rs.getString("reason"), rs.getString("flagger"),
+                        rs.getDate("Date").toString(), rs.getInt("rating"), rs.getString("email"),
+                        rs.getString("flaggerEmail"), rs.getInt("locationID"));
                 o.add(ce);
-                //System.out.println(rs.getString("Date") + " " + rs.getInt("Rating") + " " + rs.getString("Note"));
+                // System.out.println(rs.getString("Date") + " " + rs.getInt("Rating") + " " +
+                // rs.getString("Note"));
             }
 
             addEntry(o);
 
-            //test("Hello");
+            // test("Hello");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -97,7 +105,7 @@ public class AdminFlagsController implements Initializable {
 
             // You can now perform actions based on the selected row data
             if (ce != null) {
-                //System.out.println("Clicked on row: " + ce.getDate());
+                // System.out.println("Clicked on row: " + ce.getDate());
                 DBUtils.flaggedEntry = ce;
                 DBUtils.changeScene(event, "review-flags.fxml", "Review", null);
             }

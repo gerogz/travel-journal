@@ -15,7 +15,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class ReportController implements Initializable{
+public class ReportController implements Initializable {
     @FXML
     private Button report_button_back;
     @FXML
@@ -26,8 +26,6 @@ public class ReportController implements Initializable{
     private CheckBox box_nudity;
     @FXML
     private CheckBox box_other;
-
-
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -40,7 +38,8 @@ public class ReportController implements Initializable{
                 ResultSet resultSet = null;
 
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root",
+                            "me902978");
                     psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
                     psSelect.setString(1, DBUtils.user);
                     ResultSet rs = psSelect.executeQuery();
@@ -87,7 +86,7 @@ public class ReportController implements Initializable{
                         psSelect.setString(4, ee);
                         psSelect.setString(5, DBUtils.cityEntry.getDate());
                         psSelect.setString(6, id);
-                        psSelect.setString(7,"Hate Speech");
+                        psSelect.setString(7, "Hate Speech");
                         System.out.println("D");
 
                         psSelect.executeUpdate();
@@ -104,7 +103,7 @@ public class ReportController implements Initializable{
                         psSelect.setString(4, ee);
                         psSelect.setString(5, DBUtils.cityEntry.getDate());
                         psSelect.setString(6, id);
-                        psSelect.setString(7,"Nudity");
+                        psSelect.setString(7, "Nudity");
                         System.out.println("D");
 
                         psSelect.executeUpdate();
@@ -121,7 +120,7 @@ public class ReportController implements Initializable{
                         psSelect.setString(4, ee);
                         psSelect.setString(5, DBUtils.cityEntry.getDate());
                         psSelect.setString(6, id);
-                        psSelect.setString(7,"Other");
+                        psSelect.setString(7, "Other");
                         System.out.println("D");
 
                         psSelect.executeUpdate();

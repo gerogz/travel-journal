@@ -17,7 +17,8 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-public class ViewMyTripsController implements Initializable{
+
+public class ViewMyTripsController implements Initializable {
     @FXML
     private TableView<Trip> table_viewmytrips;
 
@@ -41,7 +42,7 @@ public class ViewMyTripsController implements Initializable{
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "me902978");
             System.out.println("B");
             psSelect2 = connection.prepareStatement("SELECT email \n" +
                     "FROM user\n" +
@@ -102,6 +103,7 @@ public class ViewMyTripsController implements Initializable{
 
         table_viewmytrips.setOnMouseClicked(this::onTableRowClicked);
     }
+
     private void onTableRowClicked(MouseEvent event) {
         if (event.getClickCount() == 1) {
             // Get the selected item from the TableView
@@ -110,12 +112,13 @@ public class ViewMyTripsController implements Initializable{
             // You can now perform actions based on the selected row data
             if (c != null) {
                 DBUtils.trip = c;
-                DBUtils.changeScene(event,"my-trip-report.fxml", "Sign up!", null);
+                DBUtils.changeScene(event, "my-trip-report.fxml", "Sign up!", null);
             }
         }
     }
-        public void addEntry (ObservableList < Trip > o) {
-            table_viewmytrips.setItems(o);
-            System.out.println(o);
-        }
+
+    public void addEntry(ObservableList<Trip> o) {
+        table_viewmytrips.setItems(o);
+        System.out.println(o);
+    }
 }

@@ -7,7 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="travel-journal" />
-        <module name="com.example.phase4" />
+        <module name="sign-up-mysql" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

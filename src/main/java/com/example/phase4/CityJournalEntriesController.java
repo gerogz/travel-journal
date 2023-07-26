@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
 public class CityJournalEntriesController implements Initializable {
 
     @FXML
@@ -43,17 +44,19 @@ public class CityJournalEntriesController implements Initializable {
         PreparedStatement psInsert = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "me902978");
 
-            psSelect = connection.prepareStatement("SELECT date as Date, rating as Rating, note as Note, username as User\n" +
-                    "FROM entry join city on entry.locationID = city.locationID\n" +
-                    "WHERE city.name = ? AND  privacyLevel = ?");
+            psSelect = connection
+                    .prepareStatement("SELECT date as Date, rating as Rating, note as Note, username as User\n" +
+                            "FROM entry join city on entry.locationID = city.locationID\n" +
+                            "WHERE city.name = ? AND  privacyLevel = ?");
             psSelect.setString(1, DBUtils.city.getName());
             psSelect.setString(2, "public");
             ResultSet rs = psSelect.executeQuery();
             ObservableList<CityEntries> o = FXCollections.observableArrayList();
             while (rs.next()) {
-                CityEntries ce = new CityEntries(rs.getString("Date"), rs.getInt("Rating"), rs.getString("Note"), rs.getString("User"));
+                CityEntries ce = new CityEntries(rs.getString("Date"), rs.getInt("Rating"), rs.getString("Note"),
+                        rs.getString("User"));
                 o.add(ce);
                 System.out.println(rs.getString("Date") + " " + rs.getInt("Rating") + " " + rs.getString("Note"));
             }

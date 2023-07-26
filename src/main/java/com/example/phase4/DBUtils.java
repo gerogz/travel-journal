@@ -20,8 +20,8 @@ import java.sql.*;
 public class DBUtils {
     public static String user;
     public static String email;
-    private static String sqlURL = "jdbc:mysql://localhost:3306/database1";
-    private static String sqlPassword = "lapiz2026";
+    private static String sqlURL = "jdbc:mysql://localhost:3306/sakila";
+    private static String sqlPassword = "me902978";
     public static City city;
     public static adminPageEntry flaggedEntry;
     public static CityEntries cityEntry;
@@ -40,8 +40,10 @@ public class DBUtils {
                 ResultSet resultSet = null;
                 ResultSet resultSetP = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
-                    psSelect = connection.prepareStatement("SELECT fname, lname, email, pwd FROM account WHERE username = ?");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root",
+                            "me902978");
+                    psSelect = connection
+                            .prepareStatement("SELECT fname, lname, email, pwd FROM account WHERE username = ?");
                     psSelectP = connection.prepareStatement("SELECT privacyLevel FROM user WHERE username = ?");
                     psSelect.setString(1, user);
                     psSelectP.setString(1, user);
@@ -52,7 +54,6 @@ public class DBUtils {
                         String lname = resultSet.getString("lname");
                         String email = resultSet.getString("email");
                         String pwd = resultSet.getString("pwd");
-
 
                         UserSettingsController userSettingsController = loader.getController();
                         userSettingsController.fillUserInformation(fname, lname, email, pwd);
@@ -65,20 +66,21 @@ public class DBUtils {
                         } else {
                             userSettingsController.privacyInformation(pLevel);
                         }
-                    }
-                    else {
+                    } else {
                         UserSettingsController userSettingsController = loader.getController();
                         userSettingsController.privacyInformation("private");
                     }
-
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                 } finally {
                     try {
-                        if (resultSet != null) resultSet.close();
-                        if (psSelect != null) psSelect.close();
-                        if (connection != null) connection.close();
+                        if (resultSet != null)
+                            resultSet.close();
+                        if (psSelect != null)
+                            psSelect.close();
+                        if (connection != null)
+                            connection.close();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -166,14 +168,16 @@ public class DBUtils {
                         preparedStatement.setString(1, username);
                         ResultSet rs = preparedStatement.executeQuery();
                         if (!rs.isBeforeFirst()) {
-                            preparedStatement = connection.prepareStatement("SELECT email FROM admin WHERE username = ?");
+                            preparedStatement = connection
+                                    .prepareStatement("SELECT email FROM admin WHERE username = ?");
                             preparedStatement.setString(1, username);
                             rs = preparedStatement.executeQuery();
                             rs.next();
                             email = rs.getString("email");
                             changeScene(event, "admin-flags.fxml", "Welcome!", username);
                         } else {
-                            preparedStatement = connection.prepareStatement("SELECT bannerEmail FROM user WHERE username = ?");
+                            preparedStatement = connection
+                                    .prepareStatement("SELECT bannerEmail FROM user WHERE username = ?");
                             preparedStatement.setString(1, username);
                             rs = preparedStatement.executeQuery();
                             if (!rs.isBeforeFirst()) {
@@ -312,7 +316,6 @@ public class DBUtils {
             psDelete = connection.prepareStatement(
                     "DELETE FROM entry WHERE date = ? AND locationID = ? AND username = ?;");
 
-
             psDelete.setString(1, entryDate);
             psDelete.setInt(2, locationID);
             psDelete.setString(3, user);
@@ -337,14 +340,16 @@ public class DBUtils {
         }
     }
 
-    public static void updateUser(ActionEvent event, String firstname, String lastname, String email, String password, String privacyLevel) {
+    public static void updateUser(ActionEvent event, String firstname, String lastname, String email, String password,
+            String privacyLevel) {
         Connection connection = null;
         PreparedStatement psSelect = null;
         PreparedStatement psSelectPwd = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
-            psSelect = connection.prepareStatement("UPDATE account SET fname = ?, lname = ?, email = ?, pwd = ? WHERE username = ?");
+            psSelect = connection
+                    .prepareStatement("UPDATE account SET fname = ?, lname = ?, email = ?, pwd = ? WHERE username = ?");
             psSelectPwd = connection.prepareStatement("UPDATE user SET privacyLevel = ? WHERE username = ?");
             psSelectPwd.setString(1, privacyLevel);
             psSelectPwd.setString(2, user);
