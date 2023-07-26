@@ -5,10 +5,13 @@ public class CityEntries {
     private int rating;
     private String note;
 
-    public CityEntries(String date, int rating, String note) {
+    private String user;
+
+    public CityEntries(String date, int rating, String note, String user) {
         this.date = date;
         this.rating = rating;
         this.note = note;
+        this.user = user;
     }
 
     public String getDate() {
@@ -33,6 +36,14 @@ public class CityEntries {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String toString() {
