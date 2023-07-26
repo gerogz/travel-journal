@@ -41,7 +41,7 @@ public class AdminFlagsController implements Initializable {
         PreparedStatement psSelect = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
 
             psSelect = connection.prepareStatement("SELECT entry_username AS user, entry_email AS email, city.name AS city, entry.note AS note, reason.reason AS reason, username AS flagger, email AS flaggerEmail, locationID, entry.date as Date, rating\n" +
                     "FROM reason\n" +

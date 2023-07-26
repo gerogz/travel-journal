@@ -41,7 +41,7 @@ public class ViewMyTripsController implements Initializable{
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
             System.out.println("B");
             psSelect2 = connection.prepareStatement("SELECT email \n" +
                     "FROM user\n" +

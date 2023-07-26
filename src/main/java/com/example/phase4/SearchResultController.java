@@ -17,8 +17,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-public class SearchResultController implements Initializable {
+public class SearchResultController implements Initializable{
     @FXML
     private TableView<City> table_results;
     @FXML
@@ -38,7 +37,6 @@ public class SearchResultController implements Initializable {
 
     @FXML
     private Button button_reset_searchresult;
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
         column_city.setCellValueFactory(new PropertyValueFactory<City, String>("name"));
         column_countr.setCellValueFactory(new PropertyValueFactory<City, String>("country"));
@@ -49,7 +47,7 @@ public class SearchResultController implements Initializable {
         PreparedStatement psInsert = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
 
             psSelect = connection.prepareStatement("SELECT name as Name, country as Country, avg(rating) as Rating\n" +
                     "FROM city, entry\n" +
@@ -101,15 +99,13 @@ public class SearchResultController implements Initializable {
                 PreparedStatement psInsert = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root",
-                            "SaintLouis16#");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
 
-                    psSelect = connection
-                            .prepareStatement("SELECT name as Name, country as Country, avg(rating) as Rating\n" +
-                                    "FROM city, entry\n" +
-                                    "WHERE city.locationID = entry.locationID AND city.name = ?\n" +
-                                    "GROUP BY city.locationID;");
-                    psSelect.setString(1, name);
+                    psSelect = connection.prepareStatement("SELECT name as Name, country as Country, avg(rating) as Rating\n" +
+                            "FROM city, entry\n" +
+                            "WHERE city.locationID = entry.locationID AND city.name = ?\n" +
+                            "GROUP BY city.locationID;");
+                    psSelect.setString(1,name);
                     ResultSet rs = psSelect.executeQuery();
                     ObservableList<City> o = FXCollections.observableArrayList();
                     while (rs.next()) {
@@ -152,14 +148,12 @@ public class SearchResultController implements Initializable {
                 PreparedStatement psInsert = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root",
-                            "SaintLouis16#");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
 
-                    psSelect = connection
-                            .prepareStatement("SELECT name as Name, country as Country, avg(rating) as Rating\n" +
-                                    "FROM city, entry\n" +
-                                    "WHERE city.locationID = entry.locationID\n" +
-                                    "GROUP BY city.locationID;");
+                    psSelect = connection.prepareStatement("SELECT name as Name, country as Country, avg(rating) as Rating\n" +
+                            "FROM city, entry\n" +
+                            "WHERE city.locationID = entry.locationID\n" +
+                            "GROUP BY city.locationID;");
                     ResultSet rs = psSelect.executeQuery();
                     ObservableList<City> o = FXCollections.observableArrayList();
                     while (rs.next()) {
@@ -191,10 +185,10 @@ public class SearchResultController implements Initializable {
         });
     }
 
-    public void addEntry(ObservableList<City> o) {
-        table_results.setItems(o);
-        System.out.println(o);
-    }
+        public void addEntry (ObservableList < City > o) {
+            table_results.setItems(o);
+            System.out.println(o);
+        }
 
     private void onTableRowClicked(MouseEvent event) {
         if (event.getClickCount() == 1) {
@@ -204,7 +198,7 @@ public class SearchResultController implements Initializable {
             // You can now perform actions based on the selected row data
             if (c != null) {
                 DBUtils.city = c;
-                DBUtils.changeScene(event, "city-journal-entries.fxml", "Sign up!", null);
+                DBUtils.changeScene(event,"city-journal-entries.fxml", "Sign up!", null);
             }
         }
     }

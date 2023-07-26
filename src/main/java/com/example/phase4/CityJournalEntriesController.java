@@ -43,7 +43,7 @@ public class CityJournalEntriesController implements Initializable {
         PreparedStatement psInsert = null;
         ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
 
             psSelect = connection.prepareStatement("SELECT date as Date, rating as Rating, note as Note, username as User\n" +
                     "FROM entry join city on entry.locationID = city.locationID\n" +

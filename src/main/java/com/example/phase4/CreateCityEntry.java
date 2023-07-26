@@ -46,7 +46,7 @@ public class CreateCityEntry implements Initializable {
         //PreparedStatement psCheckUserExists = null;
         //ResultSet resultSet = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
             psSelect = connection.prepareStatement("SELECT privacyLevel FROM user WHERE username = ?");
 
             psSelect.setString(1, DBUtils.user);
@@ -90,7 +90,7 @@ public class CreateCityEntry implements Initializable {
                 PreparedStatement psInsert = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
                     psSelect = connection.prepareStatement("SELECT locationID FROM city WHERE name = ?");
                     psSelect.setString(1, tf_city.getText());
                     ResultSet rs = psSelect.executeQuery();

@@ -40,7 +40,7 @@ public class ReportController implements Initializable{
                 ResultSet resultSet = null;
 
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
                     psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
                     psSelect.setString(1, DBUtils.user);
                     ResultSet rs = psSelect.executeQuery();

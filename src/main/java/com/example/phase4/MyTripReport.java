@@ -52,7 +52,7 @@ public class MyTripReport implements Initializable {
         ResultSet resultSet = null;
         System.out.println("B");
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
             String start = "1989-01-01";
             String end = "2050-01-01";
             ResultSet rs;

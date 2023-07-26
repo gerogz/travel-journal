@@ -51,7 +51,7 @@ public class adminReviewEntryController implements Initializable {
                 PreparedStatement psSelect = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
                     psSelect = connection.prepareStatement("DELETE FROM flags\n" +
                             "WHERE username = ? AND email = ? AND entry_username = ? AND entry_email = ? AND flag_date = ? AND location_ID = ?;");
                     psSelect.setString(1, DBUtils.flaggedEntry.getFlagger());
@@ -73,7 +73,7 @@ public class adminReviewEntryController implements Initializable {
                 PreparedStatement psSelect = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
                     psSelect = connection.prepareStatement("DELETE FROM entry\n" +
                             "WHERE date = ? AND locationID = ? AND email = ? AND username = ?;");
                     psSelect.setString(1, DBUtils.flaggedEntry.getDate());
@@ -93,7 +93,7 @@ public class adminReviewEntryController implements Initializable {
                 PreparedStatement psSelect = null;
                 ResultSet resultSet = null;
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/new_schema", "root", "L2O2Z/Hb7k9rf3");
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/database1", "root", "lapiz2026");
                     psSelect = connection.prepareStatement("UPDATE user\n" +
                             "SET bannerEmail = ?, bannerUsername = ?\n" +
                             "WHERE username = ? AND email = ?;");
