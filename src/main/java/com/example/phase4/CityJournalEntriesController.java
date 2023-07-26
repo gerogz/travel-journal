@@ -47,8 +47,9 @@ public class CityJournalEntriesController implements Initializable {
 
             psSelect = connection.prepareStatement("SELECT date as Date, rating as Rating, note as Note, username as User\n" +
                     "FROM entry join city on entry.locationID = city.locationID\n" +
-                    "WHERE city.name = ?");
+                    "WHERE city.name = ? AND  privacyLevel = ?");
             psSelect.setString(1, DBUtils.city.getName());
+            psSelect.setString(2, "public");
             ResultSet rs = psSelect.executeQuery();
             ObservableList<CityEntries> o = FXCollections.observableArrayList();
             while (rs.next()) {
