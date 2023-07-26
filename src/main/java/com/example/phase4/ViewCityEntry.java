@@ -28,6 +28,9 @@ public class ViewCityEntry implements Initializable {
     @FXML
     private Button button_back;
 
+    @FXML
+    private Button button_report;
+
     public void initialize(URL location, ResourceBundle resources) {
         label_city.setText(DBUtils.city.getName());
         label_date.setText(DBUtils.cityEntry.getDate());
@@ -38,6 +41,13 @@ public class ViewCityEntry implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 DBUtils.changeScene(event, "city-journal-entries.fxml", "City!", null);
+            }
+        });
+
+        button_report.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DBUtils.changeScene(event, "report.fxml", "City!", null);
             }
         });
     }

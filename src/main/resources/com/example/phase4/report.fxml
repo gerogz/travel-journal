@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="report" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="report" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.phase4.ReportController">
    <children>
       <Text fx:id="text_report" layoutX="246.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report">
          <font>
@@ -14,6 +15,8 @@
       </Text>
       <Button fx:id="report_button_back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
       <Button fx:id="report_button_submit" layoutX="266.0" layoutY="208.0" mnemonicParsing="false" text="Submit" />
-      <ChoiceBox fx:id="report_choicebox" layoutX="225.0" layoutY="147.0" prefWidth="150.0" />
+      <CheckBox fx:id="box_hate" layoutX="255.0" layoutY="130.0" mnemonicParsing="false" text="Hate Speech" />
+      <CheckBox fx:id="box_nudity" layoutX="255.0" layoutY="154.0" mnemonicParsing="false" text="Nudity" />
+      <CheckBox fx:id="box_other" layoutX="255.0" layoutY="182.0" mnemonicParsing="false" text="Other" />
    </children>
 </AnchorPane>
