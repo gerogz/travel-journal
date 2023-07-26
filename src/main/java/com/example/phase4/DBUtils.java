@@ -235,16 +235,25 @@ public class DBUtils {
     public static void deleteEntry(ActionEvent event, String cityName, String countryName, String entryDate) {
         Connection connection = null;
         PreparedStatement psDelete = null;
+        PreparedStatement psGetLocationID = null;
         ResultSet resultSet = null;
         try {
             connection = DriverManager.getConnection(sqlURL, "root", sqlPassword);
+            psGetLocationID = connection.prepareStatement(
+                    "SELECT locationID FROM city WHERE name = ? AND country = ?;");
+            psGetLocationID.setString(1, cityName);
+            psGetLocationID.setString(2, countryName);
+            System.out.println(psGetLocationID);
+            resultSet = psGetLocationID.executeQuery();
+            resultSet.next();
+            int locationID = resultSet.getInt(1);
+            System.out.println(locationID);
             psDelete = connection.prepareStatement(
-                    "SET @city_location_ID = ( SELECT locationID FROM city WHERE name = ? AND country = ?);"
-                            + "DELETE FROM entry WHERE entry.date = ? AND location_ID = @city_location_ID AND username = ?;");
-            psDelete.setString(1, cityName);
-            psDelete.setString(2, countryName);
-            psDelete.setString(3, entryDate);
-            psDelete.setString(4, user);
+                    "DELETE FROM entry WHERE date = ? AND locationID = ? AND username = ?;");
+
+            psDelete.setString(1, entryDate);
+            psDelete.setInt(2, locationID);
+            psDelete.setString(3, user);
             psDelete.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

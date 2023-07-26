@@ -50,8 +50,8 @@ public class MyCityEntryController implements Initializable {
         button_mycityentry_deleteentry.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.deleteEntry(event, DBUtils.city.getName(), DBUtils.city.getCountry(),
-                        DBUtils.cityEntry.getDate());
+                DBUtils.deleteEntry(event, DBUtils.bigEntry.getCity(), DBUtils.bigEntry.getCountry(),
+                        DBUtils.bigEntry.getDate());
             }
         });
     }
