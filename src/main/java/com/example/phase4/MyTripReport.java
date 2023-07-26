@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
 public class MyTripReport implements Initializable {
     @FXML
     private TableView<BigEntry> table_mytripreport;
@@ -51,12 +52,13 @@ public class MyTripReport implements Initializable {
         ResultSet resultSet = null;
         System.out.println("B");
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test6", "root", "SaintLouis16#");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila", "root", "me902978");
             String start = "1989-01-01";
             String end = "2050-01-01";
             ResultSet rs;
-            if (DBUtils.trip != null){
-                psSelect = connection.prepareStatement("SELECT start_date, end_date FROM trip WHERE username = ? AND name = ?");
+            if (DBUtils.trip != null) {
+                psSelect = connection
+                        .prepareStatement("SELECT start_date, end_date FROM trip WHERE username = ? AND name = ?");
                 psSelect.setString(1, DBUtils.user);
                 psSelect.setString(2, DBUtils.trip.getName());
                 rs = psSelect.executeQuery();
@@ -66,17 +68,18 @@ public class MyTripReport implements Initializable {
             }
 
             psSelect = connection.prepareStatement("SELECT email FROM user WHERE username = ?");
-            psSelect.setString(1,DBUtils.user);
+            psSelect.setString(1, DBUtils.user);
             rs = psSelect.executeQuery();
             System.out.println("C");
             rs.next();
             String e = rs.getString(1);
 
-            psSelect = connection.prepareStatement("SELECT entry.date as Date, city.name as City, city.country as Country, rating, note\n" +
-                    "FROM entry\n" +
-                    "NATURAL JOIN city\n" +
-                    "WHERE email = ? AND username = ? AND entry.date <= ? AND entry.date >= ?\n" +
-                    "ORDER BY Date;");
+            psSelect = connection.prepareStatement(
+                    "SELECT entry.date as Date, city.name as City, city.country as Country, rating, note\n" +
+                            "FROM entry\n" +
+                            "NATURAL JOIN city\n" +
+                            "WHERE email = ? AND username = ? AND entry.date <= ? AND entry.date >= ?\n" +
+                            "ORDER BY Date;");
             psSelect.setString(1, e);
             psSelect.setString(2, DBUtils.user);
             psSelect.setString(4, start);
@@ -85,7 +88,8 @@ public class MyTripReport implements Initializable {
             System.out.println("D");
             ObservableList<BigEntry> o = FXCollections.observableArrayList();
             while (rs.next()) {
-                BigEntry t = new BigEntry(rs.getString("Date"), rs.getString("City"), rs.getString("Country"), rs.getInt("rating"), rs.getString("note"));
+                BigEntry t = new BigEntry(rs.getString("Date"), rs.getString("City"), rs.getString("Country"),
+                        rs.getInt("rating"), rs.getString("note"));
                 o.add(t);
             }
 
@@ -109,6 +113,8 @@ public class MyTripReport implements Initializable {
                 }
             }
         }
+        table_mytripreport.setOnMouseClicked(this::onTableRowClicked);
+
         button_mytripreport_back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -117,8 +123,24 @@ public class MyTripReport implements Initializable {
         });
 
     }
-    public void addEntry (ObservableList < BigEntry > o) {
+
+    public void addEntry(ObservableList<BigEntry> o) {
         table_mytripreport.setItems(o);
         System.out.println(o);
+    }
+
+    // Click event handler for the TableView rows
+    private void onTableRowClicked(MouseEvent event) {
+        if (event.getClickCount() == 1) {
+            // Get the selected item from the TableView
+            BigEntry ce = table_mytripreport.getSelectionModel().getSelectedItem();
+
+            // You can now perform actions based on the selected row data
+            if (ce != null) {
+                System.out.println("Clicked on row: " + ce.getDate());
+                DBUtils.bigEntry = ce;
+                DBUtils.changeScene(event, "my-city-entry.fxml", "Sign up!", null);
+            }
+        }
     }
 }

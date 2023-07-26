@@ -64,3 +64,4 @@ target/classes/com/example/phase4/ViewTrips$2.class
 target/classes/com/example/phase4/ViewTrips$3.class
 target/classes/com/example/phase4/Trip.class
 target/classes/com/example/phase4/ReportController.class
+*.class
