@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.*;
@@ -33,11 +32,13 @@ public class MyCityEntryController implements Initializable {
     @FXML
     private Button button_mycityentry_deleteentry;
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        textfield_mycityentry_city.setText(DBUtils.city.getName());
-        textfield_mycityentry_date.setText(DBUtils.cityEntry.getDate());
-        textfield_mycityentry_rating.setText("" + DBUtils.cityEntry.getRating());
-        textfield_mycityentry_note.setText(DBUtils.cityEntry.getNote());
+        System.out.println("Test");
+        textfield_mycityentry_city.setText(DBUtils.bigEntry.getCity());
+        textfield_mycityentry_date.setText(DBUtils.bigEntry.getDate());
+        textfield_mycityentry_rating.setText("" + DBUtils.bigEntry.getRating());
+        textfield_mycityentry_note.setText(DBUtils.bigEntry.getNote());
 
         button_mycityentry_back.setOnAction(new EventHandler<ActionEvent>() {
             @Override

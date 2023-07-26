@@ -19,10 +19,11 @@ import java.sql.*;
 
 public class DBUtils {
     public static String user;
-    private static String sqlURL = "jdbc:mysql://localhost:3306/test6";
-    private static String sqlPassword = "SaintLouis16#";
+    private static String sqlURL = "jdbc:mysql://localhost:3306/sakila";
+    private static String sqlPassword = "me902978";
     public static City city;
     public static CityEntries cityEntry;
+    public static BigEntry bigEntry;
 
     public static Trip trip;
 
